@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.sumin.vknewsclient.domain.FeedPost
 import com.sumin.vknewsclient.domain.StatisticItem
 import com.sumin.vknewsclient.domain.StatisticType
-import java.lang.IllegalStateException
+import com.sumin.vknewsclient.ui.theme.NavigationItem
 import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
@@ -29,6 +29,13 @@ class MainViewModel : ViewModel() {
 
     private val _feedPosts = MutableLiveData<List<FeedPost>>(initialList)
     val feedPosts: LiveData<List<FeedPost>> = _feedPosts
+
+    private val _selectedNavItem = MutableLiveData<NavigationItem>(NavigationItem.Home)
+    val selectedNavItem: LiveData<NavigationItem> = _selectedNavItem
+
+    fun selectNavItem(item: NavigationItem) {
+        _selectedNavItem.value = item
+    }
 
     fun updateCount(feedPost: FeedPost, item: StatisticItem) {
         val modifiedFeedPosts = _feedPosts.value?.toMutableList() ?: mutableListOf()
